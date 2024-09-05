@@ -1,0 +1,87 @@
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop]
+└─$ ls
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop]
+└─$ cd ctext  
+cd: no such file or directory: ctext
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop]
+└─$ ls   
+ctext
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop]
+└─$ cd ctext
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ ls 
+ctext01.txt  ctext02.txt  ctext03.txt  ctext04.txt  ctext05.png
+                                                                                                                                                                                                                                            
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ openssl enc -d -in ctext0 -aes-128-cbc -nosalt -p
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ openssl enc -d -in ctext01.txt -aes-128-cbc -iv ABCDEF123456789 -nosalt -pbkdf2 -p 
+enter AES-128-CBC decryption password:
+hex string is too short, padding with zero bytes to length
+key=6BB73470BE77BE0736CE295D02E8A005
+iv =ABCDEF12345678900000000000000000
+Cyber security is so cool
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ openssl enc -d -in ctext02.txt -aes-256-cbc -iv ABCDEF123456789FED -nosalt -pbkdf2 -p 
+enter AES-256-CBC decryption password:
+hex string is too short, padding with zero bytes to length
+key=EFD1FD135015EA53FCAD2156AD9C993ED3851E53DF22D98FB7818F164BC81731
+iv =ABCDEF123456789FED00000000000000
+If you can read this, it means you know how to decrypt messages
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ openssl enc -d -in ctext03.txt -aes-128-ecb -nosalt -pbkdf2 -p 
+enter AES-128-ECB decryption password:
+key=C295947383A4A2E3EE0F7A1926C1C9B5
+Do not read this sentence
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ openssl enc -d -in ctext04.txt -aes-256-ecb -nosalt -pbkdf2 -p 
+enter AES-256-ECB decryption password:
+key=6DCA7B0D4A99753ACB02E2649410036CFD937A13EB353E3C8035BC0D5B92507B
+This is almost the end of the lab
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ openssl enc -d -in ctext05.png -aes-128-ecb -iv ABC123DEF456FED789 -out ppp.png -nosalt -pbkdf2 -p 
+enter AES-128-ECB decryption password:
+warning: iv not used by this cipher
+key=1E1ACAE0FEC3A356EF1D4FE8D7E56EDD
+bad decrypt
+4026E281CC7F0000:error:1C800064:Provider routines:ossl_cipher_unpadblock:bad decrypt:../providers/implementations/ciphers/ciphercommon_block.c:107:
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ ls
+ctext01.txt  ctext02.txt  ctext03.txt  ctext04.txt  ctext05.png  ppp.png
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ xdg-open ppp.png 
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ rm ppp.png 
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ ls
+ctext01.txt  ctext02.txt  ctext03.txt  ctext04.txt  ctext05.png
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ openssl enc -d -in ctext05.png -aes-128-cbc -iv ABC123DEF456FED789 -out ppp.png -nosalt -pbkdf2 -p 
+enter AES-128-CBC decryption password:
+hex string is too short, padding with zero bytes to length
+key=1E1ACAE0FEC3A356EF1D4FE8D7E56EDD
+iv =ABC123DEF456FED78900000000000000
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ ls     
+ctext01.txt  ctext02.txt  ctext03.txt  ctext04.txt  ctext05.png  ppp.png
+                                                                                                                    
+┌──(kali㉿kali)-[~/Desktop/ctext]
+└─$ xdg-open ppp.png
+                                              
+
