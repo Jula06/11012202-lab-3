@@ -1,0 +1,584 @@
+──(kali㉿kali)-[~]
+└─$ sudo apt-get install openssl 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libssl3t64
+The following packages will be upgraded:
+  libssl3t64 openssl
+2 upgraded, 0 newly installed, 0 to remove and 889 not upgraded.
+Need to get 3,610 kB of archives.
+After this operation, 5,120 B of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Ign:1 http://http.kali.org/kali kali-rolling/main amd64 libssl3t64 amd64 3.2.2-1
+Ign:2 http://http.kali.org/kali kali-rolling/main amd64 openssl amd64 3.2.2-1
+Ign:1 http://http.kali.org/kali kali-rolling/main amd64 libssl3t64 amd64 3.2.2-1
+Ign:2 http://http.kali.org/kali kali-rolling/main amd64 openssl amd64 3.2.2-1
+Ign:1 http://http.kali.org/kali kali-rolling/main amd64 libssl3t64 amd64 3.2.2-1
+Ign:2 http://http.kali.org/kali kali-rolling/main amd64 openssl amd64 3.2.2-1
+Err:1 http://http.kali.org/kali kali-rolling/main amd64 libssl3t64 amd64 3.2.2-1
+  Temporary failure resolving 'http.kali.org'
+Err:2 http://http.kali.org/kali kali-rolling/main amd64 openssl amd64 3.2.2-1
+  Temporary failure resolving 'http.kali.org'
+E: Failed to fetch http://http.kali.org/kali/pool/main/o/openssl/libssl3t64_3.2.2-1_amd64.deb  Temporary failure resolving 'http.kali.org'
+E: Failed to fetch http://http.kali.org/kali/pool/main/o/openssl/openssl_3.2.2-1_amd64.deb  Temporary failure resolving 'http.kali.org'
+E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl version             
+OpenSSL 3.2.2-dev  (Library: OpenSSL 3.2.2-dev )
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl list -cipher-commands
+aes-128-cbc       aes-128-ecb       aes-192-cbc       aes-192-ecb       
+aes-256-cbc       aes-256-ecb       aria-128-cbc      aria-128-cfb      
+aria-128-cfb1     aria-128-cfb8     aria-128-ctr      aria-128-ecb      
+aria-128-ofb      aria-192-cbc      aria-192-cfb      aria-192-cfb1     
+aria-192-cfb8     aria-192-ctr      aria-192-ecb      aria-192-ofb      
+aria-256-cbc      aria-256-cfb      aria-256-cfb1     aria-256-cfb8     
+aria-256-ctr      aria-256-ecb      aria-256-ofb      bf                
+bf-cbc            bf-cfb            bf-ecb            bf-ofb            
+camellia-128-cbc  camellia-128-ecb  camellia-192-cbc  camellia-192-ecb  
+camellia-256-cbc  camellia-256-ecb  cast              cast-cbc          
+cast5-cbc         cast5-cfb         cast5-ecb         cast5-ofb         
+des               des-cbc           des-cfb           des-ecb           
+des-ede           des-ede-cbc       des-ede-cfb       des-ede-ofb       
+des-ede3          des-ede3-cbc      des-ede3-cfb      des-ede3-ofb      
+des-ofb           des3              desx              rc2               
+rc2-40-cbc        rc2-64-cbc        rc2-cbc           rc2-cfb           
+rc2-ecb           rc2-ofb           rc4               rc4-40            
+seed              seed-cbc          seed-cfb          seed-ecb          
+seed-ofb          sm4-cbc           sm4-cfb           sm4-ctr           
+sm4-ecb           sm4-ofb           
+
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl list -commands       
+asn1parse         ca                ciphers           cmp               
+cms               crl               crl2pkcs7         dgst              
+dhparam           dsa               dsaparam          ec                
+ecparam           enc               engine            errstr            
+fipsinstall       gendsa            genpkey           genrsa            
+help              info              kdf               list              
+mac               nseq              ocsp              passwd            
+pkcs12            pkcs7             pkcs8             pkey              
+pkeyparam         pkeyutl           prime             rand              
+rehash            req               rsa               rsautl            
+s_client          s_server          s_time            sess_id           
+smime             speed             spkac             srp               
+storeutl          ts                verify            version           
+x509              
+
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo This message is my great secret! > ptext
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo This message is my great secret > ptext 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l ptext   
+-rw-rw-r-- 1 kali kali 32 Sep  5 02:49 ptext
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ wc -c < ptext   
+32
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$  openssl enc -e -in ptext -out ctext -aes-128-cbc -nosalt –p 
+enc: Extra (unknown) options: "aes-128-cbc" "–p"
+enc: Use -help for summary.
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$  openssl enc -e -aes-128-cbc -in ptext -out ctext -nosalt –p 
+enc: Extra (unknown) options: "aes-128-cbc" "–p"
+enc: Use -help for summary.
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -aes-128-cbc -k 123456  -iv ABCDE -in ptext -out ctext -nosalt –p
+enc: Extra (unknown) options: "aes-128-cbc" "–p"
+enc: Use -help for summary.
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc  -aes-128-cbc -e  -k 123456  -iv ABCDE -in ptext -out ctext -nosalt –p
+
+enc: Extra (unknown) options: "aes-128-cbc" "–p"
+enc: Use -help for summary.
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ^[[200~openssl enc -e -in ptext -out ctext -aes-128-cbc -nosalt -p              
+
+zsh: bad pattern: ^[[200~openssl
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptext -out ctext -aes-128-cbc -nosalt -p 
+
+enter AES-128-CBC encryption password:
+Verifying - enter AES-128-CBC encryption password:
+Verify failure
+bad password read
+40F6213C8D7F0000:error:1400006B:UI routines:UI_process:processing error:../crypto/ui/ui_lib.c:528:while reading strings
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptext -out ctext -aes-128-cbc -nosalt -p
+enter AES-128-CBC encryption password:
+Verifying - enter AES-128-CBC encryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+key=03AC674216F3E15C761EE1A5E255F067
+iv =953623C8B388B4459E13F978D7C846F4
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l      
+total 48
+-rw-rw-r-- 1 kali kali   48 Sep  5 03:19 ctext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ cat ctext 
+��&X8f��%�-��e�Cb�� ��h���Zv����Yj�gsU��R�                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -d -in ctext -out dectext -aes-128-cbc -nosalt -p   
+enter AES-128-CBC decryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+key=03AC674216F3E15C761EE1A5E255F067
+iv =953623C8B388B4459E13F978D7C846F4
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ cat dectext
+This message is my great secret
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 52
+-rw-rw-r-- 1 kali kali   48 Sep  5 03:19 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptext -out ctext -aes-128-ecb  -nosalt -p
+
+enter AES-128-ECB encryption password:
+Verifying - enter AES-128-ECB encryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+key=03AC674216F3E15C761EE1A5E255F067
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 52
+-rw-rw-r-- 1 kali kali   48 Sep  5 03:34 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptext -out ctext -aes-128-ecb  -nosalt -p
+
+enter AES-128-ECB encryption password:
+Verifying - enter AES-128-ECB encryption password:
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ^[[200~openssl enc -e -in ptext -out ctext -aes-128-ecb  -nosalt -p
+zsh: bad pattern: ^[[200~openssl
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptext -out ctext -aes-128-3des  -nosalt -p
+
+enc: Unknown option or cipher: aes-128-3des
+enc: Use -help for summary.
+40F606545D7F0000:error:0308010C:digital envelope routines:inner_evp_generic_fetch:unsupported:../crypto/evp/evp_fetch.c:355:Global default library context, Algorithm (aes-128-3des : 0), Properties (<null>)
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$  openssl enc -e -in ptext -out ctext -aes-128-3des -nosalt -p
+
+enc: Unknown option or cipher: aes-128-3des
+enc: Use -help for summary.
+4066E24D437F0000:error:0308010C:digital envelope routines:inner_evp_generic_fetch:unsupported:../crypto/evp/evp_fetch.c:355:Global default library context, Algorithm (aes-128-3des : 0), Properties (<null>)
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptext -out ctext -des3 -nosalt -p 
+
+enter DES-EDE3-CBC encryption password:
+Verifying - enter DES-EDE3-CBC encryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+key=03AC674216F3E15C761EE1A5E255F067953623C8B388B445
+iv =9E13F978D7C846F4
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 52
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptext -out ctext01.txt -aes-128-cbc -K 123ABC456DEF -iv ABCDEF123456789 -nosalt -p 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ "Hello World" | openssl enc -e -aes-128-cbc -k 1234 -iv 1234 -nosalt -pbkdf2 -p
+hex string is too short, padding with zero bytes to length
+key=FAF9D30188DB64C55B03CEF2EE0624D4
+iv =12340000000000000000000000000000
+Hello World: command not found
+�                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ "Here comes the encryption" | openssl enc -e -aes-128-cbc -k ABCDEF~ -iv 1234ABCDE -nosalt -pbkdf2 -p
+
+hex string is too short, padding with zero bytes to length
+key=2121C05D502071EF1FD4A56B287B8345
+iv =1234ABCDE00000000000000000000000
+Here comes the encryption: command not found
+-�F��P"�E���¯                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 52
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo Hello World > ptextHW                  
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l                     
+total 56
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+-rw-rw-r-- 1 kali kali   12 Sep  5 04:18 ptextHW
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptextHW -out ctextHW -aes-128-cbc -iv 1234 -nosalt -pbkdf2 -p 
+enter AES-128-CBC encryption password:
+Verifying - enter AES-128-CBC encryption password:
+hex string is too short, padding with zero bytes to length
+key=FAF9D30188DB64C55B03CEF2EE0624D4
+iv =12340000000000000000000000000000
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more ctextHW 
+v�L���1�^��ĥ+���
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo Here comes the encryption > ptextHC                                        
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 64
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   16 Sep  5 04:20 ctextHW
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:25 ptextHC
+-rw-rw-r-- 1 kali kali   12 Sep  5 04:18 ptextHW
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptextHC -out ctextHC -aes-128-cbc -iv 1234ABCDE -nosalt -pbkdf2 -p 
+enter AES-128-CBC encryption password:
+Verifying - enter AES-128-CBC encryption password:
+hex string is too short, padding with zero bytes to length
+key=76794A1903171B73C3FED843FE152083
+iv =1234ABCDE00000000000000000000000
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more ctextHC
+������/1-����   �wI����� Wz��N��
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo Here comes the encryption > ptextHC 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo Here comes the encryption > ptextHE 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 72
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:26 ctextHC
+-rw-rw-r-- 1 kali kali   16 Sep  5 04:20 ctextHW
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:25 ptextHC
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:28 ptextHE
+-rw-rw-r-- 1 kali kali   12 Sep  5 04:18 ptextHW
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptextHE -out ctextHE -aes-128-cbc -iv 1234ABCDE -nosalt -pbkdf2 -p 
+
+enter AES-128-CBC encryption password:
+Verifying - enter AES-128-CBC encryption password:
+hex string is too short, padding with zero bytes to length
+key=76794A1903171B73C3FED843FE152083
+iv =1234ABCDE00000000000000000000000
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more ctextHE
+������/1-����   �wI����� Wz��N��
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo I am very hungry > ptextI1                                                                       
+ 
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 80
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:26 ctextHC
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:34 ctextHE
+-rw-rw-r-- 1 kali kali   16 Sep  5 04:20 ctextHW
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:25 ptextHC
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:28 ptextHE
+-rw-rw-r-- 1 kali kali   12 Sep  5 04:18 ptextHW
+-rw-rw-r-- 1 kali kali   17 Sep  5 04:40 ptextI1
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptextI1  -out ctextI2  -aes-128-cbc -K1A2B3C4D5E6F0123ABC456DEF -iv 1234ABCDE -nosalt -pbkdf2 -p
+enc: Multiple cipher or unknown options: -aes-128-cbc and -K1A2B3C4D5E6F0123ABC456DEF
+enc: Use -help for summary.
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptextI1 -out ctextI2 -aes-128-cbc -K 1A2B3C4D5E6F0123ABC456DEF -iv 1234ABCDE -nosalt -pbkdf2 -p  
+
+hex string is too short, padding with zero bytes to length
+hex string is too short, padding with zero bytes to length
+key=1A2B3C4D5E6F0123ABC456DEF0000000
+iv =1234ABCDE00000000000000000000000
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more ctextI1
+more: cannot open ctextI1: No such file or directory
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 84
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:26 ctextHC
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:34 ctextHE
+-rw-rw-r-- 1 kali kali   16 Sep  5 04:20 ctextHW
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:42 ctextI2
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:25 ptextHC
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:28 ptextHE
+-rw-rw-r-- 1 kali kali   12 Sep  5 04:18 ptextHW
+-rw-rw-r-- 1 kali kali   17 Sep  5 04:40 ptextI1
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more ctextI2
+Q���r��X>d��8�-������6b���8�
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more I am very hungry > ptextI3
+more: cannot open I: No such file or directory
+more: cannot open am: No such file or directory
+more: cannot open very: No such file or directory
+more: cannot open hungry: No such file or directory
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo I am very hungry > ptextI3
+
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 88
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:26 ctextHC
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:34 ctextHE
+-rw-rw-r-- 1 kali kali   16 Sep  5 04:20 ctextHW
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:42 ctextI2
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:25 ptextHC
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:28 ptextHE
+-rw-rw-r-- 1 kali kali   12 Sep  5 04:18 ptextHW
+-rw-rw-r-- 1 kali kali   17 Sep  5 04:40 ptextI1
+-rw-rw-r-- 1 kali kali   17 Sep  5 04:46 ptextI3
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ penssl enc -e -in ptextI3 -out ctextI3 -aes-128-cbc -K 1A2B3C4D5E6F0123ABC456DEF -iv 123456789ABCDEF -nosalt -pbkdf2 -p  
+
+Command 'penssl' not found, did you mean:
+  command 'openssl' from deb openssl
+Try: sudo apt install <deb name>
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptextI3 -out ctextI3 -aes-128-cbc -K 1A2B3C4D5E6F0123ABC456DEF -iv 123456789ABCDEF -nosalt -pbkdf2 -p 
+hex string is too short, padding with zero bytes to length
+hex string is too short, padding with zero bytes to length
+key=1A2B3C4D5E6F0123ABC456DEF0000000
+iv =123456789ABCDEF00000000000000000
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more ctextI3                   
+�v6a�;f�\��W��++��$@]��S��
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ echo I am very hungry > ptextI4
+
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ ls -l
+total 96
+-rw-rw-r-- 1 kali kali   40 Sep  5 03:56 ctext
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:26 ctextHC
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:34 ctextHE
+-rw-rw-r-- 1 kali kali   16 Sep  5 04:20 ctextHW
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:42 ctextI2
+-rw-rw-r-- 1 kali kali   32 Sep  5 04:47 ctextI3
+-rw-rw-r-- 1 kali kali   32 Sep  5 03:23 dectext
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Desktop
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Documents
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Downloads
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Music
+drwxrwxr-x 2 kali kali 4096 Aug 29 23:29 phleng
+-rwxrwxr-x 1 kali kali   75 Aug 29 23:33 phleng.sh
+drwxr-xr-x 2 kali kali 4096 Sep  5 02:48 Pictures
+-rw-rw-r-- 1 kali kali   32 Sep  5 02:49 ptext
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:25 ptextHC
+-rw-rw-r-- 1 kali kali   26 Sep  5 04:28 ptextHE
+-rw-rw-r-- 1 kali kali   12 Sep  5 04:18 ptextHW
+-rw-rw-r-- 1 kali kali   17 Sep  5 04:40 ptextI1
+-rw-rw-r-- 1 kali kali   17 Sep  5 04:46 ptextI3
+-rw-rw-r-- 1 kali kali   17 Sep  5 10:42 ptextI4
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Public
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Templates
+drwxr-xr-x 2 kali kali 4096 Aug 29 01:30 Videos
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ openssl enc -e -in ptextI4 -out ctextI4 -aes-128-ecb -K 1A2B3C4D5E6F0123ABC456DEF -nosalt -pbkdf2 -p  
+hex string is too short, padding with zero bytes to length
+key=1A2B3C4D5E6F0123ABC456DEF0000000
+                                                                                                                    
+┌──(kali㉿kali)-[~]
+└─$ more ctextI4
+M�!q�[�<��9
+
+
+
