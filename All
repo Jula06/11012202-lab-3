@@ -1,0 +1,102 @@
+1  sudo apt update
+    2  shutdown noww
+    3  shutdown now
+    4  exut
+    5  exit
+    6  firefox
+    7  firefox google.com
+    8  clear
+    9  firefox youtube.com
+   10  clear
+   11  top
+   12  clear
+   13  mkdir phleng
+   14  ls
+   15  clear
+   16  ls
+   17  ls -l
+   18  exit
+   19  sudo apt -get install openssl
+   20  clear
+   21  sudo apt-get install openssl
+   22  openssl version
+   23  openssl list -cipher-commands
+   24  openssl list -commands
+   25  echo This message is my great secret! > ptext
+   26  echo This message is my great secret > ptext
+   27  ls -l ptext
+   28  wc -c < ptext
+   29  openssl enc -e -aes-128-cbc -k 123456  -iv ABCDE -in ptext -out ctext -nosalt –p
+   30  openssl enc  -aes-128-cbc -e  -k 123456  -iv ABCDE -in ptext -out ctext -nosalt –p\n
+   31  ^[[200~openssl enc -e -in ptext -out ctext -aes-128-cbc -nosalt -p\n
+   32  openssl enc -e -in ptext -out ctext -aes-128-cbc -nosalt -p\n
+   33  openssl enc -e -in ptext -out ctext -aes-128-cbc -nosalt -p
+   34  ls -l
+   35  cat ctext
+   36  openssl enc -d -in ctext -out dectext -aes-128-cbc -nosalt -p
+   37  cat dectext
+   38  ls -l
+   39  openssl enc -e -in ptext -out ctext -aes-128-ecb  -nosalt -p\n
+   40  ls -l
+   41  openssl enc -e -in ptext -out ctext -aes-128-ecb  -nosalt -p\n
+   42  ^[[200~openssl enc -e -in ptext -out ctext -aes-128-ecb  -nosalt -p
+   43  openssl enc -e -in ptext -out ctext -aes-128-3des  -nosalt -p\n
+   44  openssl enc -e -in ptext -out ctext -des3 -nosalt -p\n
+   45  ls -l
+   46  "Hello World" | openssl enc -e -aes-128-cbc -k 1234 -iv 1234 -nosalt -pbkdf2 -p
+   47  "Here comes the encryption" | openssl enc -e -aes-128-cbc -k ABCDEF~ -iv 1234ABCDE -nosalt -pbkdf2 -p\n
+   48  ls -l
+   49  echo Hello World > ptextHW
+   50  ls -l
+   51  openssl enc -e -in ptextHW -out ctextHW -aes-128-cbc -iv 1234 -nosalt -pbkdf2 -p
+   52  more ctextHW
+   53  echo Here comes the encryption > ptextHC 
+   54  ls -l
+   55  openssl enc -e -in ptextHC -out ctextHC -aes-128-cbc -iv 1234ABCDE -nosalt -pbkdf2 -p 
+   56  more ctextHC
+   57  echo Here comes the encryption > ptextHE
+   58  ls -l
+   59  openssl enc -e -in ptextHE -out ctextHE -aes-128-cbc -iv 1234ABCDE -nosalt -pbkdf2 -p \n
+   60  more ctextHE
+   61  echo I am very hungry > ptextI1\n
+   62  ls -l
+   63  openssl enc -e -in ptextI1  -out ctextI2  -aes-128-cbc -K1A2B3C4D5E6F0123ABC456DEF -iv 1234ABCDE -nosalt -pbkdf2 -p
+   64  openssl enc -e -in ptextI1 -out ctextI2 -aes-128-cbc -K 1A2B3C4D5E6F0123ABC456DEF -iv 1234ABCDE -nosalt -pbkdf2 -p\n
+   65  more ctextI1
+   66  ls -l
+   67  more ctextI2
+   68  more I am very hungry > ptextI3
+   69  echo I am very hungry > ptextI3\n
+   70  ls -l
+   71  penssl enc -e -in ptextI3 -out ctextI3 -aes-128-cbc -K 1A2B3C4D5E6F0123ABC456DEF -iv 123456789ABCDEF -nosalt -pbkdf2 -p  \n
+   72  openssl enc -e -in ptextI3 -out ctextI3 -aes-128-cbc -K 1A2B3C4D5E6F0123ABC456DEF -iv 123456789ABCDEF -nosalt -pbkdf2 -p 
+   73  more ctextI3
+   74  echo I am very hungry > ptextI4\n
+   75  ls -l
+   76  openssl enc -e -in ptextI4 -out ctextI4 -aes-128-ecb -K 1A2B3C4D5E6F0123ABC456DEF -nosalt -pbkdf2 -p 
+   77  more ctextI4
+   78  cd Dasktop
+   79  cd Desktop
+   80  ls
+   81  ls -l
+   82  ls
+   83  creal
+   84  clear
+   85  ls
+   86  cd ctext
+   87  ls 
+   88  cd ctext
+   89  ls
+   90  openssl enc -d -in ctext01.txt -aes-128-cbc -iv ABCDEF123456789 -nosalt -pbkdf2 -p 
+   91  openssl enc -d -in ctext02.txt -aes-256-cbc -iv ABCDEF123456789FED -nosalt -pbkdf2 -p 
+   92  openssl enc -d -in ctext03.txt -aes-128-ecb -nosalt -pbkdf2 -p 
+   93  openssl enc -d -in ctext04.txt -aes-256-ecb -nosalt -pbkdf2 -p 
+   94  openssl enc -d -in ctext05.png -aes-128-ecb -iv ABC123DEF456FED789 -out ppp.png -nosalt -pbkdf2 -p 
+   95  ls
+   96  xdg-open ppp.png
+   97  rm ppp.png
+   98  ls
+   99  openssl enc -d -in ctext05.png -aes-128-cbc -iv ABC123DEF456FED789 -out ppp.png -nosalt -pbkdf2 -p 
+  100  ls
+  101  xdg-open ppp.png
+  102  clear
